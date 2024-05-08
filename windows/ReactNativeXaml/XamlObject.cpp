@@ -325,3 +325,12 @@ void ShowAtCommand(
     menuFlyout.ShowAt(target, point);
   }
 }
+
+void StartBringIntoViewCommand(
+    xaml::FrameworkElement fe,
+    const winrt::Microsoft::ReactNative::JSValueArray &args,
+    const XamlMetadata &xaml) noexcept {
+  if (auto listViewItem = Unwrap<ListViewItem>(fe)) {
+    listViewItem.StartBringIntoView();
+  }
+}
