@@ -172,6 +172,11 @@
           "point": "Point"
         }
       }
+    ],
+    "$xaml.Controls.ListViewItem": [
+      {
+        "name": "StartBringIntoView"
+      }
     ]
   },
   "eventArgsMethods": {

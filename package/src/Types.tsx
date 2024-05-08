@@ -2,7 +2,7 @@
 /*************************************************************
 THIS FILE WAS AUTOMATICALLY GENERATED, DO NOT MODIFY MANUALLY
 SOURCE WINMDS USED:
-  - %USERPROFILE%\.nuget\packages\microsoft.ui.xaml\2.8.0\lib\uap10.0\Microsoft.UI.Xaml.winmd
+  - C:\Users\will-bemyeyes\.nuget\packages\microsoft.ui.xaml\2.8.0\lib\uap10.0\Microsoft.UI.Xaml.winmd
 **************************************************************/
 
 import type {
@@ -1039,8 +1039,15 @@ export const ListViewHeaderItem = (_ListViewHeaderItem as (ForwardRefExoticCompo
 
 export type ListViewItemProps = Omit<NativeListViewItemProps, 'type'>;
 export type ListViewItemRef = React.Component<NativeListViewItemProps> & Readonly<NativeMethods>;
-const _ListViewItem : (ForwardRefExoticComponent<React.PropsWithChildren<ListViewItemProps> & RefAttributes<ListViewItemRef>>) = React.forwardRef((props: React.PropsWithChildren<ListViewItemProps>, ref: React.ForwardedRef<ListViewItemRef>) => <NativeXamlControl {...props} type='Windows.UI.Xaml.Controls.ListViewItem' ref={ref} />);
-export const ListViewItem = (_ListViewItem as (ForwardRefExoticComponent<React.PropsWithChildren<ListViewItemProps> & RefAttributes<ListViewItemRef>>));
+export interface NativeMethodsFor_ListViewItem {
+  StartBringIntoView: (ref: React.RefObject<ListViewItemRef>, args: any[]) => void;
+}
+const _ListViewItem : (ForwardRefExoticComponent<React.PropsWithChildren<ListViewItemProps> & RefAttributes<ListViewItemRef>> & Partial<NativeMethodsFor_ListViewItem>) = React.forwardRef((props: React.PropsWithChildren<ListViewItemProps>, ref: React.ForwardedRef<ListViewItemRef>) => <NativeXamlControl {...props} type='Windows.UI.Xaml.Controls.ListViewItem' ref={ref} />);
+_ListViewItem.StartBringIntoView = (ref: React.RefObject<ListViewItemRef>, args: any[]) => {
+  const tag = findNodeHandle(ref.current);
+  UIManager.dispatchViewManagerCommand(tag, UIManager.getViewManagerConfig('XamlControl').Commands.StartBringIntoView, args);
+};
+export const ListViewItem = (_ListViewItem as (ForwardRefExoticComponent<React.PropsWithChildren<ListViewItemProps> & RefAttributes<ListViewItemRef>> & NativeMethodsFor_ListViewItem));
 
 export type MapControlProps = Omit<NativeMapControlProps, 'type'>;
 export type MapControlRef = React.Component<NativeMapControlProps> & Readonly<NativeMethods>;
