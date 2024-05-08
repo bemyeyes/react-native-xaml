@@ -334,3 +334,14 @@ void StartBringIntoViewCommand(
     listViewItem.StartBringIntoView();
   }
 }
+
+void ScrollIntoViewCommand(
+    xaml::FrameworkElement fe,
+    const winrt::Microsoft::ReactNative::JSValueArray &args,
+    const XamlMetadata &xaml) noexcept {
+  const auto &listViewItemRef = ReadPoint(args[0].GetObjectProperty("listViewItemRef").AsObject());
+  if (auto listView = Unwrap<ListView>(fe)) {
+    const auto listViewItem = Unwrap<ListViewItem>(listViewItemRef)
+    listView.ScrollIntoView(listViewItem);
+  }
+}

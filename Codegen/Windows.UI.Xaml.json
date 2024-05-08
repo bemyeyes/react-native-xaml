@@ -175,7 +175,18 @@
     ],
     "$xaml.Controls.ListViewItem": [
       {
-        "name": "StartBringIntoView"
+        "name": "StartBringIntoView",
+        "args": {
+          "point": "Point"
+        }
+      }
+    ],
+    "$xaml.Controls.ListView": [
+      {
+        "name": "ScrollIntoView",
+        "args": {
+          "listViewItemRef": "Point"
+        }
       }
     ]
   },
