@@ -1029,8 +1029,15 @@ export const ListPickerFlyout = (_ListPickerFlyout as (ForwardRefExoticComponent
 
 export type ListViewProps = Omit<NativeListViewProps, 'type'>;
 export type ListViewRef = React.Component<NativeListViewProps> & Readonly<NativeMethods>;
-const _ListView : (ForwardRefExoticComponent<React.PropsWithChildren<ListViewProps> & RefAttributes<ListViewRef>>) = React.forwardRef((props: React.PropsWithChildren<ListViewProps>, ref: React.ForwardedRef<ListViewRef>) => <NativeXamlControl {...props} type='Windows.UI.Xaml.Controls.ListView' ref={ref} />);
-export const ListView = (_ListView as (ForwardRefExoticComponent<React.PropsWithChildren<ListViewProps> & RefAttributes<ListViewRef>>));
+export interface NativeMethodsFor_ListView {
+  ScrollIntoView: (ref: React.RefObject<ListViewRef>, args: { listViewItemRef: Point,  }) => void;
+}
+const _ListView : (ForwardRefExoticComponent<React.PropsWithChildren<ListViewProps> & RefAttributes<ListViewRef>> & Partial<NativeMethodsFor_ListView>) = React.forwardRef((props: React.PropsWithChildren<ListViewProps>, ref: React.ForwardedRef<ListViewRef>) => <NativeXamlControl {...props} type='Windows.UI.Xaml.Controls.ListView' ref={ref} />);
+_ListView.ScrollIntoView = (ref: React.RefObject<ListViewRef>, args: { listViewItemRef: Point,  }) => {
+  const tag = findNodeHandle(ref.current);
+  UIManager.dispatchViewManagerCommand(tag, UIManager.getViewManagerConfig('XamlControl').Commands.ScrollIntoView, [args]);
+};
+export const ListView = (_ListView as (ForwardRefExoticComponent<React.PropsWithChildren<ListViewProps> & RefAttributes<ListViewRef>> & NativeMethodsFor_ListView));
 
 export type ListViewHeaderItemProps = Omit<NativeListViewHeaderItemProps, 'type'>;
 export type ListViewHeaderItemRef = React.Component<NativeListViewHeaderItemProps> & Readonly<NativeMethods>;
@@ -1040,12 +1047,12 @@ export const ListViewHeaderItem = (_ListViewHeaderItem as (ForwardRefExoticCompo
 export type ListViewItemProps = Omit<NativeListViewItemProps, 'type'>;
 export type ListViewItemRef = React.Component<NativeListViewItemProps> & Readonly<NativeMethods>;
 export interface NativeMethodsFor_ListViewItem {
-  StartBringIntoView: (ref: React.RefObject<ListViewItemRef>, args: any[]) => void;
+  StartBringIntoView: (ref: React.RefObject<ListViewItemRef>, args: { point: Point,  }) => void;
 }
 const _ListViewItem : (ForwardRefExoticComponent<React.PropsWithChildren<ListViewItemProps> & RefAttributes<ListViewItemRef>> & Partial<NativeMethodsFor_ListViewItem>) = React.forwardRef((props: React.PropsWithChildren<ListViewItemProps>, ref: React.ForwardedRef<ListViewItemRef>) => <NativeXamlControl {...props} type='Windows.UI.Xaml.Controls.ListViewItem' ref={ref} />);
-_ListViewItem.StartBringIntoView = (ref: React.RefObject<ListViewItemRef>, args: any[]) => {
+_ListViewItem.StartBringIntoView = (ref: React.RefObject<ListViewItemRef>, args: { point: Point,  }) => {
   const tag = findNodeHandle(ref.current);
-  UIManager.dispatchViewManagerCommand(tag, UIManager.getViewManagerConfig('XamlControl').Commands.StartBringIntoView, args);
+  UIManager.dispatchViewManagerCommand(tag, UIManager.getViewManagerConfig('XamlControl').Commands.StartBringIntoView, [args]);
 };
 export const ListViewItem = (_ListViewItem as (ForwardRefExoticComponent<React.PropsWithChildren<ListViewItemProps> & RefAttributes<ListViewItemRef>> & NativeMethodsFor_ListViewItem));
 

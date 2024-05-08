@@ -699,9 +699,14 @@ export declare const ListPickerFlyout: React.ForwardRefExoticComponent<ListPicke
 } & React.RefAttributes<ListPickerFlyoutRef>>;
 export type ListViewProps = Omit<NativeListViewProps, 'type'>;
 export type ListViewRef = React.Component<NativeListViewProps> & Readonly<NativeMethods>;
+export interface NativeMethodsFor_ListView {
+    ScrollIntoView: (ref: React.RefObject<ListViewRef>, args: {
+        listViewItemRef: Point;
+    }) => void;
+}
 export declare const ListView: React.ForwardRefExoticComponent<ListViewProps & {
     children?: React.ReactNode;
-} & React.RefAttributes<ListViewRef>>;
+} & React.RefAttributes<ListViewRef>> & NativeMethodsFor_ListView;
 export type ListViewHeaderItemProps = Omit<NativeListViewHeaderItemProps, 'type'>;
 export type ListViewHeaderItemRef = React.Component<NativeListViewHeaderItemProps> & Readonly<NativeMethods>;
 export declare const ListViewHeaderItem: React.ForwardRefExoticComponent<ListViewHeaderItemProps & {
@@ -710,7 +715,9 @@ export declare const ListViewHeaderItem: React.ForwardRefExoticComponent<ListVie
 export type ListViewItemProps = Omit<NativeListViewItemProps, 'type'>;
 export type ListViewItemRef = React.Component<NativeListViewItemProps> & Readonly<NativeMethods>;
 export interface NativeMethodsFor_ListViewItem {
-    StartBringIntoView: (ref: React.RefObject<ListViewItemRef>, args: any[]) => void;
+    StartBringIntoView: (ref: React.RefObject<ListViewItemRef>, args: {
+        point: Point;
+    }) => void;
 }
 export declare const ListViewItem: React.ForwardRefExoticComponent<ListViewItemProps & {
     children?: React.ReactNode;

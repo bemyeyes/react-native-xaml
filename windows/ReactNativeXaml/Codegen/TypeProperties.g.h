@@ -1968,10 +1968,12 @@ struct XamlCommand {
 
 void ShowAtCommand(FrameworkElement fe, const winrt::Microsoft::ReactNative::JSValueArray& /* args */, const XamlMetadata& xaml) noexcept;
 void StartBringIntoViewCommand(FrameworkElement fe, const winrt::Microsoft::ReactNative::JSValueArray& /* args */, const XamlMetadata& xaml) noexcept;
+void ScrollIntoViewCommand(FrameworkElement fe, const winrt::Microsoft::ReactNative::JSValueArray& /* args */, const XamlMetadata& xaml) noexcept;
 
 const XamlCommand xamlCommands[] = {
   { "ShowAt", ShowAtCommand},
   { "StartBringIntoView", StartBringIntoViewCommand},
+  { "ScrollIntoView", ScrollIntoViewCommand},
 };
 
 void XamlMetadata::PopulateCommands(const winrt::Windows::Foundation::Collections::IVector<winrt::hstring>& commands) const {
