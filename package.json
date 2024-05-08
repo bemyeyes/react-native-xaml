@@ -1,23 +1,64 @@
 {
-  "name": "react-native-xaml-repo",
-  "version": "0.0.3",
-  "private": true,
+  "name": "react-native-xaml",
+  "title": "React Native Xaml",
+  "version": "0.1.2",
+  "description": "Allows using XAML directly, inside of a React Native Windows app",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc --project package",
-    "change": "beachball change",
-    "bump": "beachball bump && nuget restore example\\windows && pushd package && yarn codegen && popd"
+    "build": "tsc -b",
+    "codegen": "dotnet run --project Codegen"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microsoft/react-native-xaml.git",
     "baseUrl": "https://github.com/microsoft/react-native-xaml"
   },
+  "keywords": [
+    "react-native",
+    "react-native-windows",
+    "XAML",
+    "WinUI",
+    "UWP",
+    "Fluent",
+    "Fluent UI",
+    "Windows"
+  ],
+  "author": {
+    "name": "Alexander Sklar",
+    "email": "asklar@microsoft.com"
+  },
   "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "example",
-      "examplenuget",
-      "package"
-    ]
-  }
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "@types/react": "*"
+  },
+  "peerDependencies": {
+    "react": ">= 18.0.0",
+    "react-native": ">= 0.69.0",
+    "react-native-windows": ">= 0.69.0",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "*",
+    "beachball": "^2.16.0",
+    "eslint": "^8.19.0",
+    "react": "18.2.0",
+    "react-native": "0.73.0",
+    "react-native-windows": "0.73.4",
+    "react-native-typescript-transformer": "*",
+    "typescript": "5.0.4"
+  },
+  "files": [
+    "!*.tgz",
+    "CodeGen/*.cs*",
+    "CodeGen/*.json",
+    "tsconfig.json",
+    "*.cmd",
+    "windows/",
+    "lib/",
+    "src/",
+    "!*.ruleset"
+  ]
 }

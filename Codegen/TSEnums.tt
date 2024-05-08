@@ -1,0 +1,44 @@
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+/*************************************************************
+THIS FILE WAS AUTOMATICALLY GENERATED, DO NOT MODIFY MANUALLY
+SOURCE WINMDS USED:
+<#
+foreach (var winmd in WinMDs) {
+#>
+  - <#= winmd #>
+<#
+}
+#>
+**************************************************************/
+
+<# 
+var enumsToGenerateConvertersFor = Util.GetEnums();
+foreach (var enumType in enumsToGenerateConvertersFor) { 
+var ns = Util.GetTSNamespace(enumType);
+if (ns != "") { #>
+export namespace <#= ns #>Enums {
+<# } #>
+export enum <#= Util.ToJsName(enumType) #> {
+<# foreach (var value in enumType.GetFields().Skip(1)) { #>
+  <#= value.GetName() #> = <#= (int)value.GetConstantValue(out System.Reflection.Metadata.ConstantTypeCode typeCode) #>,
+<# } #>}
+<# if (ns != "") { #>
+}
+
+<# } #>
+<# } #>
+
+
+<# foreach (var enumType in Util.fakeEnums) { #>
+export enum <#= enumType.Name #> {
+<# foreach (var value in enumType.Values) { #>
+  <#= value.Key #> = <#= value.Value #>,
+<# } #>
+}
+
+<# } #>

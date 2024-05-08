@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Midl Include="ReactPackageProvider.idl" />
+    <Midl Include="Wrapper.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="ReactPackageProvider.cpp" />
+    <ClCompile Include="XamlViewManager.cpp" />
+    <ClCompile Include="XamlMetadata.cpp" />
+    <ClCompile Include="Codegen\TypeCreator.g.cpp">
+      <Filter>Codegen</Filter>
+    </ClCompile>
+    <ClCompile Include="Serialize.cpp" />
+    <ClCompile Include="Styling.cpp" />
+    <ClCompile Include="XamlObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="ReactPackageProvider.h" />
+    <ClInclude Include="ReactNativeModule.h" />
+    <ClInclude Include="XamlViewManager.h" />
+    <ClInclude Include="XamlMetadata.h" />
+    <ClInclude Include="Crc32Str.h" />
+    <ClInclude Include="Codegen\TypeProperties.g.h">
+      <Filter>Codegen</Filter>
+    </ClInclude>
+    <ClInclude Include="Codegen\TypeEvents.g.h">
+      <Filter>Codegen</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialize.h" />
+    <ClInclude Include="Styling.h" />
+    <ClInclude Include="XamlObject.h" />
+    <ClInclude Include="Codegen\EventArgsTypeProperties.g.h">
+      <Filter>Codegen</Filter>
+    </ClInclude>
+    <ClInclude Include="Codegen\TypeEnums.g.h">
+      <Filter>Codegen</Filter>
+    </ClInclude>
+    <ClInclude Include="JSValueXaml_local.h" />
+    <ClInclude Include="Version.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Codegen\Version.g.h">
+      <Filter>Codegen</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+    <None Include="..\..\src\index.ts">
+      <Filter>TS</Filter>
+    </None>
+    <None Include="..\..\src\NativeXamlControl.tsx">
+      <Filter>TS</Filter>
+    </None>
+    <None Include="..\..\src\Props.ts">
+      <Filter>TS</Filter>
+    </None>
+    <None Include="..\..\src\Types.tsx">
+      <Filter>TS</Filter>
+    </None>
+    <None Include="..\..\..\README.md" />
+    <None Include="packages.config" />
+    <None Include="..\..\..\USAGE.md" />
+    <None Include="..\..\src\Enums.ts">
+      <Filter>TS</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Codegen">
+      <UniqueIdentifier>{0ef07389-5c8a-4c8b-9570-1cf9a2153ce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TS">
+      <UniqueIdentifier>{5c572e8a-9a91-412d-8a35-4bd65c3cfa2b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ReactNativeXaml.rc" />
+  </ItemGroup>
+</Project>

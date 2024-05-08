@@ -1,0 +1,102 @@
+﻿<#@ template language="C#" linePragmas="false" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+#pragma once
+#include "pch.h"
+#include "XamlMetadata.h"
+#include "Crc32Str.h"
+
+/*************************************************************
+THIS FILE WAS AUTOMATICALLY GENERATED, DO NOT MODIFY MANUALLY
+SOURCE WINMDS USED:
+<#
+foreach (var winmd in WinMDs) {
+#>
+  - <#= winmd #>
+<#
+}
+#>
+**************************************************************/
+
+<# foreach (var ns in Properties.Select(p => p.DeclaringType.GetNamespace()).Distinct()) { #>
+#include <winrt/<#= ns #>.h>
+<# } #>
+
+template<typename T> 
+winrt::Windows::Foundation::IInspectable AsType(const winrt::Windows::Foundation::IInspectable& o) {
+  return o.try_as<T>();
+}
+
+template<typename T> 
+winrt::Windows::Foundation::IInspectable AsUnwrappedType(const winrt::Windows::Foundation::IInspectable& o) {
+  return Unwrap<T>(o);
+}
+
+/*static*/ const PropInfo xamlPropertyMap[] = {
+  <# foreach (var p in Properties) { #>
+      { MAKE_KEY("<#= Util.ToJsName(p) #>"), <#= (Util.DerivesFrom(p.DeclaringType, $"{XamlNames.XamlNamespace}.FrameworkElement") || p.DeclaringType.GetName() == "UIElement")  ? "AsType" : "AsUnwrappedType" #><<#= Util.GetCppWinRTType(p.DeclaringType) #>>,  []() { return <#= Util.GetCppWinRTType(p.Property != null ? p.Property.DeclaringType : p.DeclaringType) #>::<#= p.SimpleName #>Property(); }, SetPropValue<<#= p.PropertyType != null ? Util.GetCppWinRTType(p.PropertyType) : Util.GetCppWinRTType(p.Property.GetPropertyType()) #>>, ViewManagerPropertyType::<#= Util.GetVMPropertyType(p)  #> },
+  <# } #>
+};
+
+<# foreach (var p in FakeProps) { #>
+void Set<#= p.GetName() #>_<#= p.DeclaringType.GetName() #>(const xaml::DependencyObject& o, const xaml::DependencyProperty&, const winrt::Microsoft::ReactNative::JSValue& v, const winrt::Microsoft::ReactNative::IReactContext& reactContext);
+<# } #>
+
+<# foreach (var p in SyntheticProps) { #>
+void Set<#= p.Name #>_<#= p.DeclaringType.GetName() #>(const xaml::DependencyObject& o, const xaml::DependencyProperty&, const winrt::Microsoft::ReactNative::JSValue& v, const winrt::Microsoft::ReactNative::IReactContext& reactContext);
+<# } #>
+
+/*static*/ const PropInfo fakeProps[] = {
+<# foreach (var p in FakeProps) { #>
+    { MAKE_KEY("<#= Util.ToJsName(p) #>"), AsUnwrappedType<<#= Util.GetCppWinRTType(p.DeclaringType) #>>, nullptr, Set<#= p.GetName() #>_<#= p.DeclaringType.GetName() #>, ViewManagerPropertyType::<#= Util.GetVMPropertyType(p)  #> },
+<# } #>
+<# foreach (var p in SyntheticProps) { #>
+    { MAKE_KEY("<#= Util.ToJsName(p.Name) #>"), AsType<<#= Util.GetCppWinRTType(p.DeclaringType) #>>, nullptr, Set<#= p.Name #>_<#= p.DeclaringType.GetName() #>, ViewManagerPropertyType::<#= Util.GetVMPropertyType(p) #> },
+<# } #>
+
+};
+
+#ifdef USE_CRC32
+void XamlMetadata::PopulateNativeProps(winrt::Windows::Foundation::Collections::IMap<winrt::hstring, ViewManagerPropertyType>& nativeProps) const {
+<# foreach (var p in Properties.Distinct(new NameEqualityComparer())) { #>
+    nativeProps.Insert(winrt::to_hstring("<#= Util.ToJsName(p) #>"), ViewManagerPropertyType::<#= Util.GetVMPropertyType(p)  #>);
+<# } #>
+}
+#else
+void XamlMetadata::PopulateNativeProps(winrt::Windows::Foundation::Collections::IMap<winrt::hstring, ViewManagerPropertyType>& nativeProps) const {
+  for (auto const& entry : xamlPropertyMap) {
+    nativeProps.Insert(winrt::to_hstring(entry.propName), entry.jsType);
+  }
+  for (auto const& entry : fakeProps) {
+    nativeProps.Insert(winrt::to_hstring(entry.propName), entry.jsType);
+  }
+}
+#endif
+
+
+struct XamlCommand {
+    const char* name;
+    void (*pfn)(FrameworkElement fe, const winrt::Microsoft::ReactNative::JSValueArray& args, const XamlMetadata& xaml) noexcept;
+};
+
+<# foreach (var kv in Util.commands) { #>
+<#   foreach (var command in kv.Value) { #>
+void <#= command.Name #>Command(FrameworkElement fe, const winrt::Microsoft::ReactNative::JSValueArray& /* args */, const XamlMetadata& xaml) noexcept;
+<# } } #>
+
+const XamlCommand xamlCommands[] = {
+<# foreach (var kv in Util.commands) { #>
+<#   foreach (var command in kv.Value) { #>
+  { "<#= command.Name #>", <#= command.Name #>Command},
+<#   } #>
+<# } #>
+};
+
+void XamlMetadata::PopulateCommands(const winrt::Windows::Foundation::Collections::IVector<winrt::hstring>& commands) const {
+  for (auto const& entry : xamlCommands) {
+    commands.Append(winrt::to_hstring(entry.name));
+  }
+}
+
